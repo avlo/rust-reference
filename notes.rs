@@ -19,7 +19,7 @@ why use "let" over "mut"?
 	because "let" allows rassign to happen only once
 
 ~~~~~
-scalar types
+scalar types - stored on stack
 
 - integer
 	Length	Signed	Unsigned
@@ -51,7 +51,7 @@ scalar types
 	let c = 'a';
 
 ~~~~~
-compound types
+compound types - stored on stack
 
 - tuple
 	grouping together values with a variety of types into one compound type.  fixed length & once declared, cannot grow/shrink
@@ -128,4 +128,36 @@ iterators
 		println!("the value is: {}", element);
 	}
 
+~~~~~
+ownership
+	guarantees safe memory w/o GCollector.  managed through ownership system via rule set checked at compile time
+	keeping track of what parts of code are using what data on the heap
+	minimizing the amount of duplicate data on the heap
+	cleaning up unused data on the heap
 
+rules
+  Each value in Rust has a variable that’s called its owner.
+  There can only be one owner at a time.
+  When the owner goes out of scope, the value will be dropped.
+
+  let s1 = String::from("hello"); // s1 is owner
+  let s2 = s1; // s1 ownership "moved" to s2
+  println!("{}, world!", s1);  // invalid since s1 no longer owns the string
+
+- stack
+	all stack data must have a known, fixed size
+	faster than heap since function parameters and local vars are pushed to top of stack, then popped when done
+	
+
+- heap 
+	Data with unknown size at compile time or a size that might change must be stored on the heap
+	heap is less organized, slower than stack
+
+~~~~~
+strings (as related to stack / heap)
+
+- string literals, known ahead of time go on stack
+	let s = "hello"; // stack value dropped when out of (local) scope
+
+- String type
+	let s = String::from("hello"); // :: namespace operatok
