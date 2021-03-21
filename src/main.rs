@@ -1,3 +1,6 @@
 fn main() {
-    println!("Hello, world again!");
+
+	// any functions ending in "!" (bang) are macros
+	println!("Hello, world born again!");
+
 }
