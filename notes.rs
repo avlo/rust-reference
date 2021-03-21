@@ -117,6 +117,15 @@ conditionals
 iterators
 
 	let a = [10, 20, 30, 40, 50];
+
+	// forward iterator
 	for element in a.iter() {
 		println!("the value is: {}", element);
 	}
+
+	// reverse iterator
+	for element in (1..=5).rev() {
+		println!("the value is: {}", element);
+	}
+
+
