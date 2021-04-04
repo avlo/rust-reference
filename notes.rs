@@ -162,6 +162,32 @@ cloning
   println!("{}, world!", s2);  // valid since it's a clone
 
 ~~~~~
+borrowing
+
+	having references as function parameters is called "borrowing"
+	trying to modify a borrowed parameter yields error:
+
+		fn main() {
+			let s = String::from("hello");
+			change(&s);  // parameter passed by reference is "borrowed" parameter
+		}
+
+		fn change(some_string: &String) {  // "borrowed" parameter 
+			some_string.push_str("extra"); // trying to modify "borrowed" parameter throws error
+		}
+
+	above can be fixed by making the reference parameter 'mutable'
+
+		fn main() {
+			let mut s = String::from("hello");
+			change(&mut s);  // parameter passed by reference and mutable 
+		}
+
+		fn change(some_string: &mut String) { // "borrowed" & "mutable" parameter
+			some_string.push_str(", world"); // modifying "borrowed" & "mutable" parameter is ok
+		}
+	
+~~~~~
 strings (as related to stack / heap)
 
 - string literals, known ahead of time go on stack
@@ -169,3 +195,5 @@ strings (as related to stack / heap)
 
 - String type
 	let s = String::from("hello"); // :: namespace operatok
+
+
